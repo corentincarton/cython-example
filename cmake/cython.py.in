@@ -1,0 +1,21 @@
+from distutils.core import setup
+from distutils.extension import Extension
+from Cython.Build import cythonize
+from Cython.Distutils import build_ext
+
+# To build the library, run:
+#  python cython.py build_ext --inplace
+
+extensions = [
+	Extension("@CYTHON_TARGET@", [@CYTHON_SRCS@],
+		include_dirs=[@CYTHON_INCLUDES@],
+		libraries=[@CYTHON_LIBS@],
+		library_dirs=["@CYTHON_LIBS_DIRS@"],
+		runtime_library_dirs=["@CYTHON_LIBS_DIRS@","@CYTHON_INSTALL_LIBS_DIRS@"],
+		)
+]
+
+setup(
+	name="@CYTHON_TARGET@ python module",
+	ext_modules = cythonize(extensions),
+)
